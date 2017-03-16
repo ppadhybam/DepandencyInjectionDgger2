@@ -29,6 +29,10 @@ public class LoginActivity extends AppCompatActivity {
     @InjectView(R.id.btnLogin)
     Button btnLogin;
 
+    @Inject
+    LoginPresenter loginPresenter;
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -41,6 +45,7 @@ public class LoginActivity extends AppCompatActivity {
                 Toast.makeText(LoginActivity.this, "jkh", Toast.LENGTH_SHORT).show();
             }
         });
+        loginPresenter.getData(this);
     }
 
 }
