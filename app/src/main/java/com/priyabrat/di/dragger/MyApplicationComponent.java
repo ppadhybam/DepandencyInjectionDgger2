@@ -1,7 +1,7 @@
 package com.priyabrat.di.dragger;
 
 import com.priyabrat.di.dragger.login.LoginActivity;
-import com.priyabrat.di.dragger.main.MainActivity;
+import com.priyabrat.di.dragger.main.HomeActivity;
 
 import javax.inject.Singleton;
 
@@ -15,14 +15,11 @@ import dagger.Component;
 @Component(
         modules = {
                 MyAppModule.class,
-                LoginActivity.class,
-                MainActivity.class
+                MyPersistanceModule.class
         }
 )
 public interface MyApplicationComponent {
 
-    public void inject(MainActivity mainActivity);
-
-    public void inject(LoginActivity loginActivity);
-
+    void inject(HomeActivity mainActivity);
+    void inject(LoginActivity loginActivity);
 }

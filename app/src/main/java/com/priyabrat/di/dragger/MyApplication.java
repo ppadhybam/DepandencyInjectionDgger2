@@ -16,6 +16,7 @@ public class MyApplication extends Application {
         super.onCreate();
         myApplicationComponent = DaggerMyApplicationComponent.builder()
                 .myAppModule(new MyAppModule(this))
+                .myPersistanceModule(new MyPersistanceModule())
                 .build();
     }
 

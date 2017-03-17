@@ -1,5 +1,7 @@
 package com.priyabrat.di.dragger.login;
 
+import android.content.Intent;
+import android.content.SharedPreferences;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -10,14 +12,15 @@ import android.widget.Toast;
 
 import com.priyabrat.di.dragger.MyApplication;
 import com.priyabrat.di.dragger.R;
+import com.priyabrat.di.dragger.main.HomeActivity;
+import com.priyabrat.di.dragger.remote.HttpAuthenticate;
+
 
 import javax.inject.Inject;
 
 import butterknife.ButterKnife;
 import butterknife.InjectView;
-import dagger.Module;
 
-@Module
 public class LoginActivity extends AppCompatActivity {
 
     @InjectView(R.id.editTextUserName)
@@ -30,7 +33,8 @@ public class LoginActivity extends AppCompatActivity {
     Button btnLogin;
 
     @Inject
-    LoginPresenter loginPresenter;
+    SharedPreferences sharedPreferences;
+
 
 
     @Override
@@ -42,10 +46,12 @@ public class LoginActivity extends AppCompatActivity {
         btnLogin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Toast.makeText(LoginActivity.this, "jkh", Toast.LENGTH_SHORT).show();
+                boolean isSuccess = HttpAuthenticate.makeLogin(sharedPreferences,editTextUserName.getText().toString(),editTextUserPass.getText().toString());
+                if(isSuccess){
+                    startActivity(new Intent(getApplicationContext(), HomeActivity.class));
+                }
             }
         });
-        loginPresenter.getData(this);
     }
 
 }
